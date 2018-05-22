@@ -12,14 +12,13 @@ char menua()
 	char aukera;
 	char str[100];
 
-	printf("============================================\n\n\n\n");
-	printf("                   MENUA                    ");
-	printf("\n\n\n============================================\n");
-	printf("a: Erreproduzitu.\n");
-	printf("b: Grabatu.\n");
-	printf("d: Grabatutakoa entzun.\n");
-	
-	printf("0: Irten\n");
+	printf("============================================\n");
+	printf("|                   MENUA                    ");
+	printf("\n============================================\n");
+	printf("| a: Erreproduzitu.\n");
+	printf("| b: Grabatu.\n");
+	printf("| d: Grabatutakoa entzun.\n");
+	printf("| 0: Irten\n");
 	printf("===========================================\n");
 
 	fgets(str, 100, stdin);
@@ -48,6 +47,7 @@ void aukeraExekutatu(char aukera, KATEA ** burua)
 		break;
 	case 'd':
 		erreproduzituGordetakoa(*burua);
+		break;
 	default:
 		printf("Sartu aukera egokia bat...\n");
 		break;
@@ -107,15 +107,15 @@ void gorde(KATEA**burua)
 	} while (strcmp("0", str) != 0);
 }
 
-void erreserbatu(char *str, KATEA **BURUA)
+void erreserbatu(char *str, KATEA **burua)
 {
-	KATEA *ptraux=*BURUA;
+	KATEA *ptraux=*burua;
 	
-	if (*BURUA == NULL)
+	if (*burua == NULL)
 	{
-		*BURUA = (KATEA*)malloc(sizeof(KATEA));
-		strcpy((*BURUA)->tecla, str);
-		(*BURUA)->ptrHurrengoa = NULL;
+		*burua = (KATEA*)malloc(sizeof(KATEA));
+		strcpy((*burua)->tecla, str);
+		(*burua)->ptrHurrengoa = NULL;
 	}
 	else
 	{

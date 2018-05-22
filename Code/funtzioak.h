@@ -1,8 +1,5 @@
-#define _CRT_SECURE_NO_WARNINGS
-
 #ifndef FUNTZIOAK_H
 #define FUNTZIOAK_H
-
 
 #define MAX_KAR 100;
 
@@ -19,7 +16,7 @@ typedef struct Katea {
 
 void erreproduzitu(char *str);
 void gorde(KATEA ** burua);
-void erreserbatu(char *str, KATEA **BURUA);
+void erreserbatu(char *str, KATEA **burua);
 void erreproduzituGordetakoa(KATEA *burua);
 
 #endif
