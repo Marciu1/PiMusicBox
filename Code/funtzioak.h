@@ -14,7 +14,7 @@ typedef struct Katea {
 }KATEA;
 
 void erreproduzitu(char *str);
-void gorde(KATEA ** burua);
+void gorde(KATEA **burua);
 void erreserbatu(char *str, KATEA **burua);
 void erreproduzituGordetakoa(KATEA *burua);
 
