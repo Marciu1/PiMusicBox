@@ -27,10 +27,11 @@ char menua()
 	return aukera;
 }
 
-void aukeraExekutatu(char aukera, KATEA ** burua)
+void aukeraExekutatu(char aukera, KATEA **burua)
 {
 	char str[100];
-	switch (aukera) {
+	switch (aukera)
+	{
 	case 'a':
 		printf("\n TEKLAK\n");
 		printf("a-->DO s-->RE d-->MI f-->FA g-->SOL h-->LA j-->SI\n");
@@ -93,7 +94,7 @@ void erreproduzitu(char *str)
 		}	
 }
 
-void gorde(KATEA**burua)
+void gorde(KATEA **burua)
 {
 	char str[100];
 	
@@ -103,7 +104,6 @@ void gorde(KATEA**burua)
 		str[strlen(str) - 1] = '\0';
 		erreproduzitu(str);
 		erreserbatu(str, burua);
-
 	} while (strcmp("0", str) != 0);
 }
 
