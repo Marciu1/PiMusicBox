@@ -3,12 +3,14 @@
 #include <string.h>
 #include <stdlib.h>
 #include <time.h>
+#pragma comment(lib, "winmm.lib")
+#include <windows.h>
 #include "funtzioak.h"
 
 char menua()
 {
 	char aukera;
-	char str[MAX_KAR];
+	char str[100];
 
 	printf("============================================\n\n\n\n");
 	printf("                   MENUA                    ");
@@ -20,7 +22,7 @@ char menua()
 	printf("0: Irten\n");
 	printf("===========================================\n");
 
-	fgets(str, MAX_KAR, stdin);
+	fgets(str, 100, stdin);
 	sscanf(str, "%c", &aukera);
 
 	return aukera;
@@ -28,62 +30,105 @@ char menua()
 
 void aukeraExekutatu(char aukera, KATEA ** burua)
 {
+	char str[100];
 	switch (aukera) {
 	case 'a':
-		
+		printf("\n TEKLAK\n");
+		printf("a-->DO s-->RE d-->MI f-->FA g-->SOL h-->LA j-->SI\n");
+		do {
+			printf("Eman tekla bati: ");
+			fgets(str, 100, stdin);
+			erreproduzitu(str);
+		} while (strcmp("0\n", str) != 0);
 		break;
 	case 'b':
-		
+		printf("\n TEKLAK\n");
+		printf("a-->DO s-->RE d-->MI f-->FA g-->SOL h-->LA j-->SI\n");
+		gorde(burua);
 		break;
 	case 'd':
-		
+		erreproduzituGordetakoa(*burua);
 	default:
 		printf("Sartu aukera egokia bat...\n");
 		break;
 	}
 }
 
-void erreproduzitu()
+void erreproduzitu(char *str)
 {
-	char nota,str[100];
 
+		switch (*str) {
+		case 'a':
 
-	printf("Jo hurrengo tekla:");
-	fgets(str, 100, stdin);
-	sscanf(str, "%c", &nota);
+			PlaySound("A.wav", NULL, SND_ASYNC);
+			break;
+		case 's':
+			PlaySound("B.wav", NULL, SND_ASYNC);
+			break;
+		case 'd':
 
-	switch (nota) {
-	case 'a':
+			break;
+		case 'f':
 
-		break;
-	case 's':
+			break;
+		case 'g':
 
-		break;
-	case 'd':
+			break;
+		case 'h':
 
-		break;
-	case 'f':
+			break;
+		case 'j':
 
-		break;
-	case 'g':
+			break;
+		case 'k':
 
-		break;
-	case 'h':
+			break;
 
-		break;
-	case 'j':
+		case '0':
+			break;
 
-		break;
+		default:
+			printf("Sartu aukera egokia bat...\n");
+			break;
 
+		}
+	
+}
+void gorde(KATEA**burua) {
+	char str[100];
+	
+	do {
+		printf("Eman tekla bati(0 bukatzeko): ");
+		fgets(str, 100, stdin);
+		str[strlen(str) - 1] = '\0';
+		erreproduzitu(str);
+		erreserbatu(str, burua);
 
-	default:
-		printf("Sartu aukera egokia bat...\n");
-		break;
-	}
+	} while (strcmp("0", str) != 0);
+
 
 }
+void erreserbatu(char *str, KATEA **BURUA) {
+	KATEA *ptraux=*BURUA;
+	
+	if (*BURUA == NULL) {
+		*BURUA = (KATEA*)malloc(sizeof(KATEA));
+		strcpy((*BURUA)->tecla, str);
+		(*BURUA)->ptrHurrengoa = NULL;
+	}
+	else {
+		while (ptraux->ptrHurrengoa != NULL)ptraux = ptraux->ptrHurrengoa;
+		ptraux->ptrHurrengoa = (KATEA*)malloc(sizeof(KATEA));
+		strcpy(ptraux->ptrHurrengoa->tecla, str);
+		ptraux->ptrHurrengoa->ptrHurrengoa = NULL;
+	}
+}
+void erreproduzituGordetakoa(KATEA *burua) {
 
-void grabatu() 
-{
+	while (burua != NULL) {
+		Sleep(500);
+		erreproduzitu(burua->tecla);
+		burua = burua->ptrHurrengoa;
+	}
 
 }
