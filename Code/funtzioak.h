@@ -9,8 +9,7 @@
 #include <time.h>
 
 typedef struct Katea {
-
-	char tecla[100];
+	char tecla[MAX_KAR];
 	struct Katea* ptrHurrengoa;
 }KATEA;
 
