@@ -11,14 +11,12 @@
 #include <stdlib.h>
 #include <time.h>
 
-
-
-
 typedef struct Katea {
 
 	char tecla[100];
 	struct Katea* ptrHurrengoa;
 }KATEA;
+
 void erreproduzitu(char *str);
 void gorde(KATEA ** burua);
 void erreserbatu(char *str, KATEA **BURUA);

@@ -16,7 +16,7 @@ char menua()
 	printf("                   MENUA                    ");
 	printf("\n\n\n============================================\n");
 	printf("a: Erreproduzitu.\n");
-	printf("b:Grabatu.\n");
+	printf("b: Grabatu.\n");
 	printf("d: Grabatutakoa entzun.\n");
 	
 	printf("0: Irten\n");
@@ -56,8 +56,8 @@ void aukeraExekutatu(char aukera, KATEA ** burua)
 
 void erreproduzitu(char *str)
 {
-
-		switch (*str) {
+		switch (*str)
+		{
 		case 'a':
 
 			PlaySound("A.wav", NULL, SND_ASYNC);
@@ -90,11 +90,11 @@ void erreproduzitu(char *str)
 		default:
 			printf("Sartu aukera egokia bat...\n");
 			break;
-
-		}
-	
+		}	
 }
-void gorde(KATEA**burua) {
+
+void gorde(KATEA**burua)
+{
 	char str[100];
 	
 	do {
@@ -105,30 +105,33 @@ void gorde(KATEA**burua) {
 		erreserbatu(str, burua);
 
 	} while (strcmp("0", str) != 0);
-
-
 }
-void erreserbatu(char *str, KATEA **BURUA) {
+
+void erreserbatu(char *str, KATEA **BURUA)
+{
 	KATEA *ptraux=*BURUA;
 	
-	if (*BURUA == NULL) {
+	if (*BURUA == NULL)
+	{
 		*BURUA = (KATEA*)malloc(sizeof(KATEA));
 		strcpy((*BURUA)->tecla, str);
 		(*BURUA)->ptrHurrengoa = NULL;
 	}
-	else {
+	else
+	{
 		while (ptraux->ptrHurrengoa != NULL)ptraux = ptraux->ptrHurrengoa;
 		ptraux->ptrHurrengoa = (KATEA*)malloc(sizeof(KATEA));
 		strcpy(ptraux->ptrHurrengoa->tecla, str);
 		ptraux->ptrHurrengoa->ptrHurrengoa = NULL;
 	}
 }
-void erreproduzituGordetakoa(KATEA *burua) {
 
-	while (burua != NULL) {
+void erreproduzituGordetakoa(KATEA *burua)
+{
+	while (burua != NULL)
+	{
 		Sleep(500);
 		erreproduzitu(burua->tecla);
 		burua = burua->ptrHurrengoa;
 	}
-
 }
