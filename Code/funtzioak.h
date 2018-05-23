@@ -1,13 +1,21 @@
+<<<<<<< HEAD
 #define _CRT_SECURE_NO_WARNINGS
 #ifndef FUNTZIOAK_H
 #define FUNTZIOAK_H
 
 #define MAX_KAR 100
+=======
+#ifndef FUNTZIOAK_H
+#define FUNTZIOAK_H
+
+#define MAX_KAR 100;
+>>>>>>> master
 
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include <time.h>
+<<<<<<< HEAD
 //noten soinuen helbidea
 #define DO ".//sounds//Do_"
 #define RE ".//sounds//Re_"
@@ -33,5 +41,17 @@ typedef struct Katea {
 	int tecla;
 	struct Katea* ptrHurrengoa;
 }KATEA;
+=======
+
+typedef struct Katea {
+	char tecla[MAX_KAR];
+	struct Katea* ptrHurrengoa;
+}KATEA;
+
+void erreproduzitu(char *str);
+void gorde(KATEA **burua);
+void erreserbatu(char *str, KATEA **burua);
+void erreproduzituGordetakoa(KATEA *burua);
+>>>>>>> master
 
 #endif
