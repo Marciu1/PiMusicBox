@@ -1,4 +1,3 @@
-#define _CRT_SECURE_NO_WARNINGS
 #ifndef FUNTZIOAK_H
 #define FUNTZIOAK_H
 
@@ -8,6 +7,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <time.h>
+
 //noten soinuen helbidea
 #define DO ".//sounds//Do_"
 #define RE ".//sounds//Re_"
@@ -16,7 +16,6 @@
 #define SOL ".//sounds//Sol_"
 #define LA ".//sounds//La_"
 #define SI ".//sounds//Si_"
-
 //notak
 #define Do 97
 #define Re 115
@@ -27,9 +26,8 @@
 #define Si 106
 #define BUKATU 112
 
-
-typedef struct Katea {
-
+typedef struct Katea
+{
 	int tecla;
 	clock_t tartea;
 	struct Katea* ptrHurrengoa;
@@ -48,6 +46,5 @@ void zerrendaBete(int instrumentua, KATEA**burua);
 void abestiaFitxategianIdatzi(KATEA *burua);
 void grabatutakoAbestiaIrakurri(KATEA **burua);
 void grabatutakoaErreproduzitu(KATEA *burua, int instrumentua);
-
 
 #endif
