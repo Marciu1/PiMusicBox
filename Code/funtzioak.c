@@ -3,14 +3,12 @@
 #include <string.h>
 #include <stdlib.h>
 #include <time.h>
-#pragma comment(lib, "winmm.lib")
-#include <windows.h>
 #include "funtzioak.h"
 
 char menua()
 {
 	char aukera;
-	char str[100];
+	char str[MAX_KAR];
 
 	printf("============================================\n\n\n\n");
 	printf("                   MENUA                    ");
@@ -22,113 +20,228 @@ char menua()
 	printf("0: Irten\n");
 	printf("===========================================\n");
 
-	fgets(str, 100, stdin);
+	fgets(str, MAX_KAR, stdin);
 	sscanf(str, "%c", &aukera);
 
 	return aukera;
 }
-
-void aukeraExekutatu(char aukera, KATEA ** burua)
+int instrumento()
 {
-	char str[100];
+	int instrumentua = 0;
+	char str[128];
+
+	do {
+		printf("============================================\n\n\n\n");
+		printf("                 AUKERAK                    ");
+		printf("\n\n\n============================================\n");
+		printf("1: PIANO\n");
+		printf("2: 8-BIT\n");
+		printf("3: TROMPETA\n");
+		printf("4: EXTRAS\n");		
+		printf("===========================================\n");
+
+		fgets(str, 128, stdin);
+		sscanf(str, "%d", &instrumentua);
+	} while ((instrumentua > 0) || (instrumentua < 5));
+
+	return instrumentua;
+}
+
+
+void aukeraExekutatu(char aukera, KATEA ** burua,int instrumentua)
+{
 	switch (aukera) {
 	case 'a':
 		printf("\n TEKLAK\n");
-		printf("a-->DO s-->RE d-->MI f-->FA g-->SOL h-->LA j-->SI\n");
-		do {
-			printf("Eman tekla bati: ");
-			fgets(str, 100, stdin);
-			erreproduzitu(str);
-		} while (strcmp("0\n", str) != 0);
+		printf("a-->DO s-->RE d-->MI f-->FA g-->SOL h-->LA j-->SI//gelditzeko 0 sakatu");
+		moduLibrea(instrumentua);
+
+		
 		break;
 	case 'b':
 		printf("\n TEKLAK\n");
-		printf("a-->DO s-->RE d-->MI f-->FA g-->SOL h-->LA j-->SI\n");
-		gorde(burua);
+		printf("a-->DO s-->RE d-->MI f-->FA g-->SOL h-->LA j-->SI//grabaketa bukatzeko 'p' sakatu");
+		zerrendaBete(instrumentua, burua);
+		
 		break;
 	case 'd':
-		erreproduzituGordetakoa(*burua);
+		
 	default:
 		printf("Sartu aukera egokia bat...\n");
 		break;
 	}
 }
+////////////////////////
+void moduLibrea(int instrumentua)
+{
+	char tecla='1';
 
-void erreproduzitu(char *str)
+	while (tecla != 0)
+	{
+		tecla =notaEskatu() ;
+		erreproduzitu(instrumentua,tecla);
+	}
+}
+int notaEskatu()
+{
+	char str[100];
+	int nota;
+
+	printf("Jo hurrengo tekla:");
+	fgets(str, 100, stdin);
+	sscanf(str, "%d", &nota);
+
+	return nota;
+}
+int erreproduzitu(int instrumentua,int nota)
 {
 
-		switch (*str) {
-		case 'a':
+	switch (nota) {
+		char soinua[100];
+	case '97'/*a*/:
+		sprintf(soinua, "aplay %s%d.wav", DO, instrumentua);
+		system(soinua);
 
-			PlaySound("A.wav", NULL, SND_ASYNC);
-			break;
-		case 's':
-			PlaySound("B.wav", NULL, SND_ASYNC);
-			break;
-		case 'd':
+		break;
+	case '115'/*s*/:
+		sprintf(soinua, "aplay %s%d.wav", RE, instrumentua);
+		system(soinua);
+		break;
+	case '100'/*d*/:
+		sprintf(soinua, "aplay %s%d.wav", MI, instrumentua);
+		system(soinua);
+		break;
+	case '102'/*f*/:
+		sprintf(soinua, "aplay %s%d.wav", FA, instrumentua);
+		system(soinua);
+		break;
+	case '103'/*g*/:
+		sprintf(soinua, "aplay %s%d.wav", SOL, instrumentua);
+		system(soinua);
+		break;
+	case '104'/*h*/:
+		sprintf(soinua, "aplay %s%d.wav", LA, instrumentua);
+		system(soinua);
+		break;
+	case '106'/*j*/:
+		sprintf(soinua, "aplay %s%d.wav", SI, instrumentua);
+		system(soinua);
+		break;
+	case '112'/*p*/:
+		nota = 112;
+		break;
+	default:
+		printf("Sartu aukera egokia bat...\n");
+		break;
+	}
+	return nota;
+}
 
-			break;
-		case 'f':
+////////////////////////
 
-			break;
-		case 'g':
+void abestiaezabatu(KATEA **burua)
+{
+	KATEA *ptrAux = *burua;
 
-			break;
-		case 'h':
+	while (ptrAux != NULL)
+	{
+		ptrAux = ptrAux->ptrHurrengoa;
+		free(*burua);
+		*burua = ptrAux;
+	}
 
-			break;
-		case 'j':
+}
+KATEA* sortuNota(int tecla)
+{
+	KATEA *ptrBerria;
 
-			break;
-		case 'k':
+	ptrBerria= (KATEA*)malloc(sizeof(KATEA));
 
-			break;
+	ptrBerria->tecla = tecla;
+	ptrBerria->ptrHurrengoa = NULL;
+	return ptrBerria;
+}
+void zerrendanGorde(int tecla, KATEA**burua)
+{
+	KATEA *ptrBerria = *burua;
 
-		case '0':
-			break;
-
-		default:
-			printf("Sartu aukera egokia bat...\n");
-			break;
-
+	if (*burua == NULL) *burua = sortuNota(tecla);
+	else
+	{
+		while (ptrBerria->ptrHurrengoa != NULL)
+		{
+			ptrBerria = ptrBerria->ptrHurrengoa;
 		}
-	
-}
-void gorde(KATEA**burua) {
-	char str[100];
-	
-	do {
-		printf("Eman tekla bati(0 bukatzeko): ");
-		fgets(str, 100, stdin);
-		str[strlen(str) - 1] = '\0';
-		erreproduzitu(str);
-		erreserbatu(str, burua);
-
-	} while (strcmp("0", str) != 0);
-
-
-}
-void erreserbatu(char *str, KATEA **BURUA) {
-	KATEA *ptraux=*BURUA;
-	
-	if (*BURUA == NULL) {
-		*BURUA = (KATEA*)malloc(sizeof(KATEA));
-		strcpy((*BURUA)->tecla, str);
-		(*BURUA)->ptrHurrengoa = NULL;
-	}
-	else {
-		while (ptraux->ptrHurrengoa != NULL)ptraux = ptraux->ptrHurrengoa;
-		ptraux->ptrHurrengoa = (KATEA*)malloc(sizeof(KATEA));
-		strcpy(ptraux->ptrHurrengoa->tecla, str);
-		ptraux->ptrHurrengoa->ptrHurrengoa = NULL;
+		ptrBerria->ptrHurrengoa = sortuNota(tecla);
 	}
 }
-void erreproduzituGordetakoa(KATEA *burua) {
+void zerrendaBete(int instrumentua, KATEA**burua)
+{
+	int tecla;
 
-	while (burua != NULL) {
-		Sleep(500);
-		erreproduzitu(burua->tecla);
+	while (tecla != 112)
+	{
+		tecla = notaEskatu();
+		erreproduzitu(instrumentua,tecla);
+		zerrendanGorde(tecla, burua);
+	}
+}
+void abestiaFitxategianIdatzi(KATEA *burua)
+{
+	FILE *fitxategia;
+
+	fitxategia = fopen("abestia.txt", "w");
+	while (burua != NULL)
+	{
+		fprintf(fitxategia, "%d\n", burua->tecla);
 		burua = burua->ptrHurrengoa;
 	}
+	fclose(fitxategia);
+}
+//////////////////
 
+void grabatutakoAbestiaIrakurri(KATEA **burua)
+{
+	FILE *fitxategia;
+	int tecla;
+	KATEA *ptrAux,*ptrBerria;
+
+	if (*burua == NULL)
+	{
+		fitxategia = fopen("abestia.txt", "r");
+		while (fscanf(fitxategia, "%d\n", &tecla) != EOF)
+		{
+			if (*burua == NULL) {				
+				ptrBerria = sortuNota(tecla);
+				*burua = ptrBerria;
+				ptrAux = *burua;
+			}
+			else
+			{
+				ptrBerria = sortuNota(tecla);
+				while (ptrAux->ptrHurrengoa != NULL)ptrAux = ptrAux->ptrHurrengoa;
+				ptrAux->ptrHurrengoa = ptrBerria;
+
+			}
+		
+		}
+		fclose(fitxategia);
+	}
+}
+void grabatutakoaErreproduzitu(KATEA *burua,int instrumentua)
+{
+	int tecla;
+	
+	if (burua != NULL)
+	{
+		while (burua != NULL)
+		{
+			tecla = burua->tecla;
+			erreproduzitu(instrumentua, tecla);
+			burua = burua->ptrHurrengoa;
+			
+		}
+
+	}
+	
 }
