@@ -1,21 +1,13 @@
-<<<<<<< HEAD
 #define _CRT_SECURE_NO_WARNINGS
 #ifndef FUNTZIOAK_H
 #define FUNTZIOAK_H
 
 #define MAX_KAR 100
-=======
-#ifndef FUNTZIOAK_H
-#define FUNTZIOAK_H
-
-#define MAX_KAR 100;
->>>>>>> master
 
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include <time.h>
-<<<<<<< HEAD
 //noten soinuen helbidea
 #define DO ".//sounds//Do_"
 #define RE ".//sounds//Re_"
@@ -39,19 +31,23 @@
 typedef struct Katea {
 
 	int tecla;
-	struct Katea* ptrHurrengoa;
-}KATEA;
-=======
-
-typedef struct Katea {
-	char tecla[MAX_KAR];
+	clock_t tartea;
 	struct Katea* ptrHurrengoa;
 }KATEA;
 
-void erreproduzitu(char *str);
-void gorde(KATEA **burua);
-void erreserbatu(char *str, KATEA **burua);
-void erreproduzituGordetakoa(KATEA *burua);
->>>>>>> master
+char menua();
+int instrumento();
+void aukeraExekutatu(char aukera, KATEA ** burua, int instrumentua);
+void moduLibrea(int instrumentua);
+int notaEskatu();
+int erreproduzitu(int instrumentua, int nota);
+void abestiaezabatu(KATEA **burua);
+KATEA* sortuNota(int tecla, clock_t tartea);
+void zerrendanGorde(int tecla, KATEA**burua, clock_t tartea);
+void zerrendaBete(int instrumentua, KATEA**burua);
+void abestiaFitxategianIdatzi(KATEA *burua);
+void grabatutakoAbestiaIrakurri(KATEA **burua);
+void grabatutakoaErreproduzitu(KATEA *burua, int instrumentua);
+
 
 #endif
