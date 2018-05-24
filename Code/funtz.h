@@ -42,6 +42,7 @@ int erreproduzitu(int instrumentua, int nota);
 void abestiaezabatu(KATEA **burua);
 KATEA* sortuNota(int tecla, clock_t tartea);
 void zerrendanGorde(int tecla, KATEA**burua, clock_t tartea);
+int filtro(int tecla);
 void zerrendaBete(int instrumentua, KATEA**burua);
 void abestiaFitxategianIdatzi(KATEA *burua);
 void grabatutakoAbestiaIrakurri(KATEA **burua);

@@ -11,6 +11,7 @@ char menua()
 	char aukera;
 	char str[MAX_KAR];
 
+
 	printf("\n ============================================");
 	printf("\n |                   MENUA                  |  ");
 	printf("\n ============================================\n");
@@ -19,7 +20,10 @@ char menua()
 	printf(" | d: Grabatutakoa entzun.\n");
 	printf(" | 0: Irten\n");
 	printf("===========================================\n");
+
 	printf("\n 	    Sartu zure aukera: ");
+
+
 	fgets(str, MAX_KAR, stdin);
 	sscanf(str, "%c", &aukera);
 
@@ -43,6 +47,8 @@ int instrumento()
 		printf("\n 	    Sartu zure aukera: ");
 		fgets(str, 128, stdin);
 		sscanf(str, "%d", &instrumentua);
+		if((instrumentua >0) || (instrumentua < 5))
+			printf("Sartu aukera egoki bat.\n");
 	} while ((instrumentua < 0) && (instrumentua > 5));
 
 	return instrumentua;
@@ -76,7 +82,7 @@ void moduLibrea(int instrumentua)
 {
 	int tecla=1;
 
-	while (tecla != 0)
+	while (tecla != '0')
 	{
 		tecla = notaEskatu();
 		erreproduzitu(instrumentua,tecla);
@@ -85,11 +91,13 @@ void moduLibrea(int instrumentua)
 
 int notaEskatu()
 {
-
-	int nota;
+	char str[100];
+	char nota;
 
 	printf("Jo hurrengo tekla: ");
-	nota=fgetc(stdin);
+	fgets(str, 128, stdin);
+	str[strlen(str)-1]='\0';
+	sscanf(str, "%c", &nota);
 
 	return nota;
 }
@@ -191,9 +199,21 @@ void zerrendaBete(int instrumentua, KATEA**burua)
 		hasiera = clock();
 		tecla = notaEskatu();
 		bukaera = clock();
-		erreproduzitu(instrumentua, tecla);
-		zerrendanGorde(tecla, burua, bukaera-hasiera);
+		if(filtro(tecla)==1)
+		{
+			erreproduzitu(instrumentua, tecla);
+			zerrendanGorde(tecla, burua, bukaera-hasiera);
+		}
+		else printf("\n Sartu aukera egoki bat\n");
 	}
+}
+
+int filtro(int tecla)
+{
+	int egoera=0;
+	if(tecla==97||tecla==115||tecla==100||tecla==102||tecla==103||tecla==104||tecla==106)
+		egoera=1;
+	return egoera;
 }
 
 void abestiaFitxategianIdatzi(KATEA *burua)
@@ -249,7 +269,7 @@ void grabatutakoaErreproduzitu(KATEA *burua,int instrumentua)
 		{
 			tecla = burua->tecla;
 			erreproduzitu(instrumentua, tecla);
-			sleep(burua->tartea);
+			sleep(burua->tartea/1000);
 			burua = burua->ptrHurrengoa;
 
 		}
