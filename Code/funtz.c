@@ -103,13 +103,18 @@ int notaEskatu()
 
 int erreproduzitu(int instrumentua, int nota)
 {
+	Mix_Chunk *sonido;
 	char soinua[100];
 
 	switch (nota)
 	{
 	case 97/*a*/:
-		sprintf(soinua, "aplay %s%d.wav", DO, instrumentua);
-		system(soinua);
+		sprintf(soinua, "%s%d.wav", DO, instrumentua);
+		sonido=Mix_LoadWAV(soinua);
+		Mix_VolumeChunk(sonido, 10);
+		Mix_AllocateChannels();
+		Mix_PlayChannel(1, sonido, 0);
+
 		break;
 	case 115 /*s*/:
 		sprintf(soinua, "aplay %s%d.wav", RE, instrumentua);
