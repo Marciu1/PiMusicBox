@@ -7,6 +7,9 @@
 #include <string.h>
 #include <stdlib.h>
 #include <time.h>
+#include <unistd.h>
+#include <SDL2/SDL_mixer.h>
+#include <SDL2/SDL.h>
 
 //noten soinuen helbidea
 #define DO ".//notak//do"

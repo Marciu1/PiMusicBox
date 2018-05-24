@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <time.h>
+#include <SDL2/SDL_mixer.h>
+#include <SDL2/SDL.h>
 #include "funtz.h"
 
 char menua()
@@ -192,6 +194,10 @@ void zerrendaBete(int instrumentua, KATEA**burua)
 {
 	int tecla;
 	clock_t hasiera, bukaera;
+
+	if(burua!=NULL){
+		abestiaezabatu(burua);
+	}
 
 	while (tecla != 112)
 	{
