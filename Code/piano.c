@@ -13,14 +13,25 @@ int main(int argc, char **argv)
 	char aukera = '0';
 	KATEA *burua = NULL;
 
-	aukera = menua();
-	while (aukera != '0')
-	{
-		instrumentua = instrumento();
-		aukeraExekutatu(aukera, &burua, instrumentua);
-		aukera = menua();
+	if (SDL_Init(SDL_INIT_EVERYTHING)!=0)
+	{	
+		printf("\n Errorea SDL abieraztean.");
 	}
+	if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 4096) < 0)
+	{	
+		printf("\n Errorea SDL_Mixer abieraztean.");
+	}
+	else
+	{
+		aukera = menua();
+		while (aukera != '0')
+		{
+			instrumentua = instrumento();
+			aukeraExekutatu(aukera, &burua, instrumentua);
+			aukera = menua();
+		}
+	}
+	
+	SDL_Quit();
 	return 0;
 }
-
-

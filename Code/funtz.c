@@ -12,7 +12,6 @@ char menua()
 	char aukera;
 	char str[MAX_KAR];
 
-
 	printf("\n ============================================");
 	printf("\n |                   MENUA                  |  ");
 	printf("\n ============================================\n");
@@ -21,10 +20,7 @@ char menua()
 	printf(" | d: Grabatutakoa entzun.\n");
 	printf(" | 0: Irten\n");
 	printf("===========================================\n");
-
 	printf("\n 	    Sartu zure aukera: ");
-
-
 	fgets(str, MAX_KAR, stdin);
 	sscanf(str, "%c", &aukera);
 
@@ -49,7 +45,9 @@ int instrumento()
 		fgets(str, 128, stdin);
 		sscanf(str, "%d", &instrumentua);
 		if((instrumentua >0) || (instrumentua < 5))
-			printf("Sartu aukera egoki bat.\n");
+		{
+			printf(" Sartu aukera egoki bat.\n");
+		}
 	} while ((instrumentua < 0) && (instrumentua > 5));
 
 	return instrumentua;
@@ -61,7 +59,7 @@ void aukeraExekutatu(char aukera, KATEA **burua, int instrumentua)
 	{
 	case 'a':
 		printf("\n TEKLAK\n");
-		printf("a-->DO s-->RE d-->MI f-->FA g-->SOL h-->LA j-->SI//gelditzeko 0 sakatu");
+		printf(" a-->DO s-->RE d-->MI f-->FA g-->SOL h-->LA j-->SI//gelditzeko 0 sakatu");
 		moduLibrea(instrumentua);
 		break;
 	case 'b':
@@ -95,7 +93,7 @@ int notaEskatu()
 	char str[100];
 	char nota;
 
-	printf("Jo hurrengo tekla: ");
+	printf("\n Jo hurrengo tekla: ");
 	fgets(str, 128, stdin);
 	str[strlen(str)-1]='\0';
 	sscanf(str, "%c", &nota);
@@ -141,7 +139,7 @@ int erreproduzitu(int instrumentua, int nota)
 		nota = 112;
 		break;
 	default:
-				break;
+			break;
 	}
 	return nota;
 }
@@ -157,7 +155,6 @@ void abestiaezabatu(KATEA **burua)
 		free(*burua);
 		*burua = ptrAux;
 	}
-
 }
 
 KATEA* sortuNota(int tecla, clock_t tartea)
@@ -216,8 +213,12 @@ void zerrendaBete(int instrumentua, KATEA**burua)
 int filtro(int tecla)
 {
 	int egoera=0;
-	if(tecla==97||tecla==115||tecla==100||tecla==102||tecla==103||tecla==104||tecla==106)
-		egoera=1;
+
+	if(tecla==97 || tecla==115 || tecla==100 || tecla==102 || tecla==103 || tecla==104 || tecla==106)
+	{
+		egoera = 1;
+	}
+
 	return egoera;
 }
 
@@ -276,9 +277,6 @@ void grabatutakoaErreproduzitu(KATEA *burua,int instrumentua)
 			erreproduzitu(instrumentua, tecla);
 			sleep(burua->tartea/1000);
 			burua = burua->ptrHurrengoa;
-
 		}
 	}
 }
-
-
