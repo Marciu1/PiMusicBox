@@ -17,7 +17,7 @@ int main(int argc, char **argv)
 	{	
 		printf("\n Errorea SDL abieraztean.");
 	}
-	if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 4096) < 0)
+	if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 4096) < 0) //soinuak.c fitxategian dago ere funtzio baten barruan
 	{	
 		printf("\n Errorea SDL_Mixer abieraztean.");
 	}

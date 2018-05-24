@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <unistd.h>
 #include <time.h>
 #include <SDL2/SDL_mixer.h>
 #include <SDL2/SDL.h>
+#include <unistd.h>
 #include "funtz.h"
 
 char menua()
@@ -30,7 +30,7 @@ char menua()
 int instrumento()
 {
 	int instrumentua = 0;
-	char str[128];
+	char str[MAX_KAR];
 
 	do {
 		printf("\n ============================================");
@@ -42,7 +42,7 @@ int instrumento()
 		printf(" | 4: Gehigarriak\n");
 		printf("===========================================\n");
 		printf("\n 	    Sartu zure aukera: ");
-		fgets(str, 128, stdin);
+		fgets(str, MAX_KAR, stdin);
 		sscanf(str, "%d", &instrumentua);
 		if((instrumentua >0) || (instrumentua < 5))
 		{
@@ -90,11 +90,11 @@ void moduLibrea(int instrumentua)
 
 int notaEskatu()
 {
-	char str[100];
+	char str[MAX_KAR];
 	char nota;
 
 	printf("\n Jo hurrengo tekla: ");
-	fgets(str, 128, stdin);
+	fgets(str, MAX_KAR, stdin);
 	str[strlen(str)-1]='\0';
 	sscanf(str, "%c", &nota);
 
@@ -104,7 +104,7 @@ int notaEskatu()
 int erreproduzitu(int instrumentua, int nota)
 {
 	Mix_Chunk *sonido;
-	char soinua[100];
+	char soinua[MAX_KAR];
 
 	switch (nota)
 	{
@@ -112,7 +112,7 @@ int erreproduzitu(int instrumentua, int nota)
 		sprintf(soinua, "%s%d.wav", DO, instrumentua);
 		sonido=Mix_LoadWAV(soinua);
 		Mix_VolumeChunk(sonido, 10);
-		Mix_AllocateChannels();
+		Mix_AllocateChannels(7);
 		Mix_PlayChannel(1, sonido, 0);
 
 		break;
@@ -219,7 +219,7 @@ int filtro(int tecla)
 {
 	int egoera=0;
 
-	if(tecla==97 || tecla==115 || tecla==100 || tecla==102 || tecla==103 || tecla==104 || tecla==106)
+	if((tecla==97) || (tecla==115) || (tecla==100) || (tecla==102) || (tecla==103) || (tecla==104) || (tecla==106))
 	{
 		egoera = 1;
 	}

@@ -1,24 +1,26 @@
 #ifndef FUNTZ_H
 #define FUNTZ_H
 
-#define MAX_KAR 100
+#define MAX_KAR 128
+#define MAX_SOUNDS 15
+#define MAX_NOTAK 15
 
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include <time.h>
-#include <unistd.h>
 #include <SDL2/SDL_mixer.h>
 #include <SDL2/SDL.h>
+#include <unistd.h>
 
 //noten soinuen helbidea
-#define DO ".//notak//do"
-#define RE ".//notak//re"
-#define MI ".//notak//mi"
-#define FA ".//notak//fa"
-#define SOL ".//notak//sol"
-#define LA ".//notak//la"
-#define SI ".//notak//si"
+#define DO ".//Soinuak//do"
+#define RE ".//Soinuak//re"
+#define MI ".//Soinuak//mi"
+#define FA ".//Soinuak//fa"
+#define SOL ".//Soinuak//sol"
+#define LA ".//Soinuak//la"
+#define SI ".//Soinuak//si"
 //notak
 #define Do 97
 #define Re 115
@@ -50,5 +52,16 @@ void zerrendaBete(int instrumentua, KATEA**burua);
 void abestiaFitxategianIdatzi(KATEA *burua);
 void grabatutakoAbestiaIrakurri(KATEA **burua);
 void grabatutakoaErreproduzitu(KATEA *burua, int instrumentua);
+
+void audioInit();
+int loadSound(char *fileName);
+int loadTheMusic(char *fileName);
+int playSound(int idSound,int channel);
+int playMusic(void);
+void toggleMusic(void);
+void musicUnload(void);
+void soundsUnload();
+void audioTerminate(void);
+void initSound();
 
 #endif
