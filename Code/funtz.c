@@ -1,4 +1,3 @@
-#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -16,7 +15,7 @@ char menua()
 	printf("\n |                   MENUA                  |  ");
 	printf("\n ============================================\n");
 	printf(" | a: Erreproduzitu.\n");
-	printf(" | b:Grabatu.\n");
+	printf(" | b: Grabatu.\n");
 	printf(" | d: Grabatutakoa entzun.\n");
 	printf(" | 0: Irten\n");
 	printf("===========================================\n");
@@ -36,13 +35,13 @@ int instrumento()
 	char str[128];
 
 	do {
-		printf("============================================\n\n\n\n");
-		printf("                 AUKERAK                    ");
-		printf("\n\n\n============================================\n");
-		printf("1: PIANO\n");
-		printf("2: 8-BIT\n");
-		printf("3: TROMPETA\n");
-		printf("4: EXTRAS\n");
+		printf("\n ============================================");
+		printf("\n |                 AUKERAK                  |  ");
+		printf("\n ============================================\n");
+		printf(" | 1: Pianoa\n");
+		printf(" | 2: 8-Bit\n");
+		printf(" | 3: Tronpeta\n");
+		printf(" | 4: Gehigarriak\n");
 		printf("===========================================\n");
 		printf("\n 	    Sartu zure aukera: ");
 		fgets(str, 128, stdin);
