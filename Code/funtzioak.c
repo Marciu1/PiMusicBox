@@ -139,7 +139,6 @@ void aukeraExekutatu(char aukera, KATEA **burua, int instrumentua)
 			digitalWrite(28,0);
 			break;
 		case 1:
-
 			game(instrumentua);
 			digitalWrite(27,0);
 			digitalWrite(25,0);
@@ -176,7 +175,6 @@ EGOERA zeinNota(int *nota, EGOERA egoera, int instrumentua)
 	}
 	if((digitalRead(4)==1)&&(egoera.egoera2==0))
 	{
-
 		*nota=La;
 		forkFuntzioa(instrumentua,*nota);
 		egoera.egoera2=1;
@@ -184,7 +182,6 @@ EGOERA zeinNota(int *nota, EGOERA egoera, int instrumentua)
 	}
 	if((digitalRead(5)==1)&&(egoera.egoera3==0))
 	{
-
 		*nota=Sol;
 		forkFuntzioa(instrumentua,*nota);
 		egoera.egoera3=1;
@@ -192,7 +189,6 @@ EGOERA zeinNota(int *nota, EGOERA egoera, int instrumentua)
 	}
 	if((digitalRead(6)==1)&&(egoera.egoera4==0))
 	{
-
 		*nota=Fa;
 		forkFuntzioa(instrumentua,*nota);
 		egoera.egoera4=1;
@@ -200,7 +196,6 @@ EGOERA zeinNota(int *nota, EGOERA egoera, int instrumentua)
 	}
 	if((digitalRead(21)==1)&&(egoera.egoera5==0))
 	{
-
 		*nota=Mi;
 		forkFuntzioa(instrumentua,*nota);
 		egoera.egoera5=1;
@@ -208,7 +203,6 @@ EGOERA zeinNota(int *nota, EGOERA egoera, int instrumentua)
 	}
 	if((digitalRead(22)==1)&&(egoera.egoera6==0))
 	{
-
 		*nota=Re;
 		forkFuntzioa(instrumentua,*nota);
 		egoera.egoera6=1;
@@ -414,7 +408,6 @@ void grabatutakoaErreproduzitu(KATEA *burua,int instrumentua)
 	}
 }
 
-
 void forkFuntzioa(int instrumentua, int nota)
 {
 	int pid=fork();
@@ -427,6 +420,7 @@ void forkFuntzioa(int instrumentua, int nota)
 
 	}
 }
+
 void game(int instrumentua)
 {
 	int i=-1, e, nota, notakMak[50],notakJok[50], egoera=0, correct =1;
