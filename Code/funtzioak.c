@@ -57,15 +57,15 @@ char menua()
 			egoera=1;
 		}
 		if(digitalRead(2)==1)
-				{
-					aukera=4;
-					egoera=1;
-				}
+		{
+			aukera=4;
+			egoera=1;
+		}
 	}
 	sleep(1);
 	system("clear");
-
 	digitalWrite(23,0);
+
 	return aukera;
 }
 
@@ -74,15 +74,15 @@ int instrumento()
 	digitalWrite(24,1);
 	int instrumentua = 0;
 
-/*printf("\n ============================================\n");
-		printf("                 AUKERAK                    ");
-		printf("\n ============================================\n");
-		printf("| 1: PIANO\n");
-		printf("| 2: 8-BIT\n");
-		printf("| 3: BATERIA\n");
-		printf("| 4: UKELELE\n");
-		printf("===========================================\n");
-		printf("\n 	    Sartu zure aukera: ");*/
+	/*printf("\n ============================================\n");
+	printf("                 AUKERAK                    ");
+	printf("\n ============================================\n");
+	printf("| 1: PIANO\n");
+	printf("| 2: 8-BIT\n");
+	printf("| 3: BATERIA\n");
+	printf("| 4: UKELELE\n");
+	printf("===========================================\n");
+	printf("\n 	    Sartu zure aukera: ");*/
 
 	while (instrumentua == 0)
 	{
@@ -103,7 +103,6 @@ int instrumento()
 			instrumentua=1;
 		}
 	}
-
  	sleep(1);
 	digitalWrite(24,0);
 
@@ -116,38 +115,38 @@ void aukeraExekutatu(char aukera, KATEA **burua, int instrumentua)
 
 	switch (aukera)
 	{
-	case 4:
-		digitalWrite(27,1);
-		/*printf("\n TEKLAK\n");
-		printf("a-->DO s-->RE d-->MI f-->FA g-->SOL h-->LA j-->SI//gelditzeko 0 sakatu");
-		printf("\n");*/
-		moduLibrea(instrumentua);
-		digitalWrite(27,0);
-		break;
-	case 3:
-		digitalWrite(25,1);
-		/*printf("\n TEKLAK\n");
-		printf("a-->DO s-->RE d-->MI f-->FA g-->SOL h-->LA j-->SI//grabaketa bukatzeko 'p' sakatu");
-		printf("\n");*/
-		zerrendaBete(instrumentua, burua);
-		abestiaFitxategianIdatzi(*burua);
-		digitalWrite(25,0);
-		break;
-	case 2:
-		digitalWrite(28,1);
-		grabatutakoAbestiaIrakurri(burua);
-		grabatutakoaErreproduzitu(*burua, instrumentua);
-		digitalWrite(28,0);
-		break;
-	case 1:
+		case 4:
+			digitalWrite(27,1);
+			/*printf("\n TEKLAK\n");
+			printf("a-->DO s-->RE d-->MI f-->FA g-->SOL h-->LA j-->SI//gelditzeko 0 sakatu");
+			printf("\n");*/
+			moduLibrea(instrumentua);
+			digitalWrite(27,0);
+			break;
+		case 3:
+			digitalWrite(25,1);
+			/*printf("\n TEKLAK\n");
+			printf("a-->DO s-->RE d-->MI f-->FA g-->SOL h-->LA j-->SI//grabaketa bukatzeko 'p' sakatu");
+			printf("\n");*/
+			zerrendaBete(instrumentua, burua);
+			abestiaFitxategianIdatzi(*burua);
+			digitalWrite(25,0);
+			break;
+		case 2:
+			digitalWrite(28,1);
+			grabatutakoAbestiaIrakurri(burua);
+			grabatutakoaErreproduzitu(*burua, instrumentua);
+			digitalWrite(28,0);
+			break;
+		case 1:
 
-		game(instrumentua);
-		digitalWrite(27,0);
-		digitalWrite(25,0);
-		digitalWrite(28,0);
-		break;
-	default:
-		break;
+			game(instrumentua);
+			digitalWrite(27,0);
+			digitalWrite(25,0);
+			digitalWrite(28,0);
+			break;
+		default:
+			break;
 		sleep(1);
 	}
 }
@@ -160,18 +159,12 @@ void moduLibrea(int instrumentua)
 	while (nota != 8)
 	{
 		egoera = zeinNota(&nota, egoera, instrumentua);
-
 	}
 }
 
-
-
-
 EGOERA zeinNota(int *nota, EGOERA egoera, int instrumentua)
 {
-
 	egoera=nullJarri(egoera);
-
 
 	if((digitalRead(3)==1)&&(egoera.egoera1==0))
 	{
@@ -214,13 +207,13 @@ EGOERA zeinNota(int *nota, EGOERA egoera, int instrumentua)
 		egoera.egoeraGen=1;
 	}
 	if((digitalRead(22)==1)&&(egoera.egoera6==0))
-		{
+	{
 
-			*nota=Re;
-			forkFuntzioa(instrumentua,*nota);
-			egoera.egoera6=1;
-			egoera.egoeraGen=1;
-		}
+		*nota=Re;
+		forkFuntzioa(instrumentua,*nota);
+		egoera.egoera6=1;
+		egoera.egoeraGen=1;
+	}
 	if((digitalRead(26)==1)&&(egoera.egoera7==0))
 	{
 		*nota=Do;
@@ -234,13 +227,11 @@ EGOERA zeinNota(int *nota, EGOERA egoera, int instrumentua)
 		egoera.egoeraGen=1;
 	}
 
-
 	return egoera;
-
 }
 
-
-EGOERA nullJarri(EGOERA egoera){
+EGOERA nullJarri(EGOERA egoera)
+{
 		if(digitalRead(3)==0)egoera.egoera1=0;
 		if(digitalRead(4)==0)egoera.egoera2=0;
 		if(digitalRead(5)==0)egoera.egoera3=0;
@@ -251,7 +242,6 @@ EGOERA nullJarri(EGOERA egoera){
 
 		return egoera;
 }
-
 
 int erreproduzitu(int instrumentua, int nota)
 {
@@ -342,10 +332,10 @@ void zerrendanGorde(int tecla, KATEA**burua, long tartea)
 
 void zerrendaBete(int instrumentua, KATEA**burua)
 {
-	int tecla;
+	int tecla, egoera;
 	long  tartea;
-	int egoera;
 	struct timeval hasiera,bukaera;
+
 	if(*burua!=NULL)
 	{
 		abestiaezabatu(burua);
@@ -356,7 +346,9 @@ void zerrendaBete(int instrumentua, KATEA**burua)
 		egoera=0;
 		gettimeofday(&hasiera, NULL);
 		while(egoera==0)
+		{
 			egoera = notaJokua(&tecla, egoera);
+		}
 		gettimeofday(&bukaera, NULL);
 		tartea=(bukaera.tv_sec-hasiera.tv_sec)*1000000+(bukaera.tv_usec-hasiera.tv_usec);
 		erreproduzitu(instrumentua, tecla);
@@ -428,14 +420,15 @@ void forkFuntzioa(int instrumentua, int nota)
 	int pid=fork();
 
 	if(pid==-1)printf("errore bat fork");
-	else if(pid==0){
+	else if(pid==0)
+	{
 		erreproduzitu(instrumentua, nota);
 		exit(0);
 
 	}
 }
-void game(int instrumentua){
-
+void game(int instrumentua)
+{
 	int i=-1, e, nota, notakMak[50],notakJok[50], egoera=0, correct =1;
 	char soinua[100];
 
@@ -448,7 +441,8 @@ void game(int instrumentua){
 		sprintf(soinua, "aplay .//Soinuak//empezar.wav");
 		system(soinua);
 		sleep(1);
-		for(e=0;e<=i;e++){
+		for(e=0;e<=i;e++)
+		{
 			nota=rand() % 7 +1;
 			erreproduzitu(instrumentua, nota);
 			*(notakMak+e)=nota;
@@ -459,25 +453,30 @@ void game(int instrumentua){
 		digitalWrite(25,0);
 		sprintf(soinua, "aplay .//Soinuak//empezar.wav");
 		system(soinua);
-		for(e=0;e<=i;e++){
+		for(e=0;e<=i;e++)
+		{
 			egoera=0;
-			while(egoera==0){
+			while(egoera==0)
+			{
 				egoera=notaJokua(&nota, egoera);
 			}
 			erreproduzitu(instrumentua, nota);
 			*(notakJok+e)=nota;
 		}
-		for(e=0;e<=i;e++){
+		for(e=0;e<=i;e++)
+		{
 			if(*(notakMak+e)!=*(notakJok+e))correct=0;
 		}
-		if(correct==0){
+		if(correct==0)
+		{
 			digitalWrite(28,0);
 			digitalWrite(25,1);
 			digitalWrite(27,0);
 			sprintf(soinua, "aplay .//Soinuak//incorrect.wav");
 			system(soinua);
 		}
-		else{
+		else
+		{
 			digitalWrite(27,1);
 			digitalWrite(25,0);
 			digitalWrite(28,0);
@@ -486,9 +485,6 @@ void game(int instrumentua){
 		}
 		sleep(2);
 	}
-
-
-
 }
 
 int notaJokua(int *nota, int egoera)
@@ -529,17 +525,10 @@ int notaJokua(int *nota, int egoera)
 		egoera=1;
 	}
 	if(digitalRead(7)==1)
-		{
-			*nota=Bukatu;
-			egoera=1;
-		}
-
+	{
+		*nota=Bukatu;
+		egoera=1;
+	}
 
 	return egoera;
 }
-
-
-
-
-
-
